@@ -1,6 +1,42 @@
 document.addEventListener("DOMContentLoaded", () => {
     initializeLoggers();
+    checkAndUpdateOnLoad();
+    setInterval(checkAndUpdate, 60000); // Run checkAndUpdate every minute
 });
+
+function checkAndUpdateOnLoad() {
+    const lastLoggedTime = new Date(localStorage.getItem("lastLoggedTime"));
+    const currentTime = new Date();
+
+    if (!lastLoggedTime || new Date(lastLoggedTime).getDate() !== currentTime.getDate()) {
+        initializeLoggers(); // Reset logs
+        updateGraph('water'); // Reset water intake graph
+    }
+}
+
+function checkAndUpdate() {
+    const currentTime = new Date();
+    const currentHour = currentTime.getHours();
+    const currentMinute = currentTime.getMinutes();
+
+    if (currentHour === 0 && currentMinute === 0) {
+        initializeLoggers(); // Reset logs
+        updateGraph('water'); // Reset water intake graph
+    }
+}
+
+function logActivity(type, status) {
+    localStorage.setItem("lastLoggedTime", new Date().toISOString()); // Update last logged time
+    const log = JSON.parse(localStorage.getItem(type));
+    const today = new Date().toLocaleDateString('en-IN', { timeZone: 'Asia/Kolkata' });
+    if (!log.some(entry => entry.date === today)) {
+        log.push({ date: today, status: status });
+        localStorage.setItem(type, JSON.stringify(log));
+        updateGraph(type);
+        disableButtons(type);
+    }
+}
+
 
 let chartInstances = {}; // Object to store chart instances
 
@@ -15,20 +51,9 @@ function initializeLoggers() {
     });
 }
 
-function logActivity(type, status) {
-    const log = JSON.parse(localStorage.getItem(type));
-    const today = new Date().toISOString().split("T")[0];
-    if (!log.some(entry => entry.date === today)) {
-        log.push({ date: today, status: status });
-        localStorage.setItem(type, JSON.stringify(log));
-        updateGraph(type);
-        disableButtons(type);
-    }
-}
-
 function logWater(amount) {
     const log = JSON.parse(localStorage.getItem("water"));
-    const today = new Date().toISOString().split("T")[0];
+    const today = new Date().toLocaleDateString('en-IN', { timeZone: 'Asia/Kolkata' });
     let entry = log.find(entry => entry.date === today);
     if (entry) {
         entry.amount += amount;
@@ -49,7 +74,8 @@ function logCustomWater() {
 
 function updateGraph(type) {
     const log = JSON.parse(localStorage.getItem(type));
-    const today = new Date().toISOString().split("T")[0];
+    const today = new Date().toLocaleDateString('en-IN', { timeZone: 'Asia/Kolkata' });
+    console.log(today)
     const graphElement = document.getElementById(`${type}-graph`);
 
     if (graphElement) {
@@ -154,7 +180,7 @@ function disableButtons(type) {
 function disableButtonsIfLoggedToday(type) {
     if (type !== "water") {
         const log = JSON.parse(localStorage.getItem(type));
-        const today = new Date().toISOString().split("T")[0];
+        const today = new Date().toLocaleDateString('en-IN', { timeZone: 'Asia/Kolkata' });
         if (log.some(entry => entry.date === today)) {
             disableButtons(type);
         }
