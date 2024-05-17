@@ -94,7 +94,7 @@ function updateGraph(type) {
         // Chart options
         let options = {
             responsive: true,
-            maintainAspectRatio: true,
+            maintainAspectRatio: false,
             scales: {
                 x: { 
                     title: { display: true, text: 'Day' } 
