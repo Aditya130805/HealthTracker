@@ -20,13 +20,13 @@ function checkAndUpdate() {
     const currentMinute = currentTime.getMinutes();
 
     if (currentHour === 0 && currentMinute === 0) {
-        initializeLoggers(); // Reset logs
-        updateGraph('water'); // Reset water intake graph
+        initializeLoggers();
+        updateGraph('water');
     }
 }
 
 function logActivity(type, status) {
-    localStorage.setItem("lastLoggedTime", new Date().toISOString()); // Update last logged time
+    localStorage.setItem("lastLoggedTime", new Date().toISOString());
     const log = JSON.parse(localStorage.getItem(type));
     const today = new Date().toLocaleDateString('en-IN', { timeZone: 'Asia/Kolkata' });
     if (!log.some(entry => entry.date === today)) {
@@ -38,7 +38,7 @@ function logActivity(type, status) {
 }
 
 
-let chartInstances = {}; // Object to store chart instances
+let chartInstances = {};
 
 function initializeLoggers() {
     const logs = ["medicine", "exercise", "water"];
@@ -109,9 +109,9 @@ function updateGraph(type) {
                                 return value === 1 ? 'Yes' : 'No';
                             }
                         },
-                        stepSize: 1, // To ensure only 0 and 1 (false and true) are displayed
-                        max: 1, // Maximum value of the y-axis for boolean
-                        min: 0 // Minimum value of the y-axis for boolean
+                        stepSize: 1,
+                        max: 1,
+                        min: 0
                     }
                 }
             }
