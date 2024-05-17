@@ -99,7 +99,7 @@ function updateGraph(type) {
                 datasets: [{
                     label: `${type.charAt(0).toUpperCase() + type.slice(1)} Log`,
                     data: data,
-                    backgroundColor: type === "medicine" ? 'gold' : (type === "exercise" ? 'red' : '#87CEFA')
+                    backgroundColor: type === "medicine" ? 'gold' : (type === "exercise" ? 'red' : '#1090d2')
                 }]
             },
             options: options
@@ -130,7 +130,7 @@ function updateGraph(type) {
                 labels: ['Water Drank', 'Remaining'],
                 datasets: [{
                     data: [consumedWater, remainingWater],
-                    backgroundColor: ['#87CEFA', '#e0e0e0']
+                    backgroundColor: ['#1090d2', '#e0e0e0']
                 }]
             },
             options: {
