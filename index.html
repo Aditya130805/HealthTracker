@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Health Tracker</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/x-icon" href="Images/logo.ico">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <h1 class="website-title">My Health Tracker & Logger</h1>
+    <div class="logger-container">
+        <!-- Medicine Logger -->
+        <div class="logger medicine-logger">
+            <div class="logger-header">
+                <img src="Images/medicine.png" alt="Medicine Logo" class="logger-logo">
+                <h2>Medicine</h2>
+            </div>
+            <div class="logger-content">
+                <div class="log-buttons">
+                    <button class="log-btn" id="medicine-yes" onclick="logActivity('medicine', 'yes')">Yes</button>
+                    <button class="log-btn" id="medicine-no" onclick="logActivity('medicine', 'no')">No</button>
+                </div>
+                <div class="log-graph"><canvas id="medicine-graph"></canvas></div>
+            </div>
+        </div>
+
+        <!-- Exercise Logger -->
+        <div class="logger exercise-logger">
+            <div class="logger-header">
+                <img src="Images/exercise.png" alt="Exercise Logo" class="logger-logo">
+                <h2>Exercise</h2>
+            </div>
+            <div class="logger-content">
+                <div class="log-buttons">
+                    <button class="log-btn" id="exercise-yes" onclick="logActivity('exercise', 'yes')">Yes</button>
+                    <button class="log-btn" id="exercise-no" onclick="logActivity('exercise', 'no')">No</button>
+                </div>
+                <div class="log-graph"><canvas id="exercise-graph"></canvas></div>
+            </div>
+        </div>
+
+        <!-- Water Logger -->
+        <div class="logger water-logger">
+            <div class="logger-header">
+                <img src="Images/water.png" alt="Water Logo" class="logger-logo">
+                <h2>Water</h2>
+            </div>
+            <div class="logger-content">
+                <div class="log-buttons">
+                    <input type="number" id="custom-water" placeholder="Custom ml">
+                    <button class="log-btn" onclick="logCustomWater()" style="width: 100px;">Log Custom</button>
+                    <button class="log-btn" onclick="logWater(50)">50ml</button>
+                    <button class="log-btn" onclick="logWater(100)">100ml</button>
+                    <button class="log-btn" onclick="logWater(200)">200ml</button>
+                    <button class="log-btn" onclick="logWater(250)">250ml</button>
+                    <button class="log-btn" onclick="logWater(300)">300ml</button>
+                    <button class="log-btn" onclick="logWater(400)">400ml</button>
+                    <button class="log-btn" onclick="logWater(500)">500ml</button>
+                </div>
+                <div class="water-graphs">
+                    <div><canvas id="water-pie-graph"></canvas></div>
+                    <div class="log-graph"><canvas id="water-column-graph"></canvas></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
