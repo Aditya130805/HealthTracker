@@ -109,7 +109,7 @@ function updateGraph(type) {
                                 return value === 1 ? 'Yes' : 'No';
                             }
                         },
-                        stepSize: 1,
+                        stepSize:  type === 'water' ? 500 : 1,
                         max: 1,
                         min: 0
                     }
